@@ -2,6 +2,7 @@
   <div class="text-center">
     <img class="w-20 mx-auto m-2" :src="image" alt="">
     <div>Flux (FLUX)</div>
+    <div>Hashrate: {{ hashRate.toFixed(2) }} Sol/s</div>
     <div>Coins: {{ coins.toFixed(4) }}</div>
     <div>Price: ${{ price.toFixed(2) }}</div>
     <div>
@@ -20,7 +21,8 @@ export default {
       coins: 0,
       price: 0,
       coinsMinedOn2Miners: 10.031175,
-      image: ''
+      image: '',
+      hashRate: 0,
     };
   },
   created() {
@@ -41,6 +43,7 @@ export default {
           "https://flux.minerpool.org/api/worker_stats?address=t1Ztcer4A3mMEC5duWZCaewn7GUVp3JF52W"
         )
         .then((response) => {
+          this.hashRate = response.data.totalHash;
           this.coins =
             response.data.paid +
             response.data.balance +
