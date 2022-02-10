@@ -1,6 +1,6 @@
 <template>
   <div class="text-center">
-    <img class="w-20 mx-auto m-2" :src="image" alt="">
+    <img class="w-20 mx-auto m-2" :src="image" alt="" />
     <div>
       <h3>Ravencoin (RVN)</h3>
     </div>
@@ -19,9 +19,9 @@ export default {
   name: "Ravencoin",
   data() {
     return {
-      coins: 571.05675,
+      coins: 571.05675, // Includes paid out and pending ballance
       price: 0,
-      image: ''
+      image: "",
     };
   },
   created() {

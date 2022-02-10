@@ -1,9 +1,11 @@
 <template>
   <div class="text-center">
-    <img class="w-20 mx-auto m-2" :src="image" alt="">
+    <img class="w-20 mx-auto m-2" :src="image" alt="" />
     <div>Flux (FLUX)</div>
     <div>Hashrate: {{ hashRate.toFixed(2) }} Sol/s</div>
-    <div>Coins: {{ coins.toFixed(4) }}</div>
+    <!-- <div>Parallel Assets: {{ parallelAssets.toFixed(4) }}</div> -->
+    <!-- <div>Mined: {{ minedCoins.toFixed(4) }}</div> -->
+    <div>Total Coins: {{ coins.toFixed(4) }}</div>
     <div>Price: ${{ price.toFixed(2) }}</div>
     <div>
       Ballance: <b>${{ ballance.toFixed(2) }}</b>
@@ -18,10 +20,12 @@ export default {
   name: "Flux",
   data() {
     return {
+      minedCoins: 0,
       coins: 0,
+      parallelAssets: 0,
       price: 0,
       coinsMinedOn2Miners: 10.031175,
-      image: '',
+      image: "",
       hashRate: 0,
     };
   },
@@ -37,6 +41,23 @@ export default {
     ...mapMutations({
       updateFlux: "updateFlux",
     }),
+    getParallelAssets() {
+      axios
+        .get(
+          "https://flux.minerpool.org/workers/t1Ztcer4A3mMEC5duWZCaewn7GUVp3JF52W"
+        )
+        .then((response) => {
+          var regex = /<td>(\d+\.\d+?) FLUX<\/td>/gm;
+          var matches,
+            output = [];
+          while ((matches = regex.exec(response.data))) {
+            output.push(parseFloat(matches[1]));
+          }
+          const total = output.reduce((a, b) => a + b, 0);
+          this.parallelAssets = total;
+          this.coins = total + this.minedCoins;
+        });
+    },
     getCoins() {
       axios
         .get(
@@ -44,11 +65,12 @@ export default {
         )
         .then((response) => {
           this.hashRate = response.data.totalHash;
-          this.coins =
+          this.minedCoins =
             response.data.paid +
             response.data.balance +
             response.data.immature +
             this.coinsMinedOn2Miners;
+          this.getParallelAssets();
         });
     },
     getPrice() {

@@ -1,21 +1,21 @@
 <template>
-<div class="h-screen bg-gray-800">
-  <div class="relative overflow-auto p-8">
-    <div class="grid grid-cols-2 gap-8">
-      <div class="bg-gray-200 rounded-lg p-4">
-        <ravencoin />
+  <div class="h-screen bg-gray-800">
+    <div class="relative overflow-auto p-8">
+      <div class="grid grid-cols-2 gap-8">
+        <div class="bg-gray-200 rounded-lg p-4">
+          <ravencoin />
+        </div>
+        <div class="bg-gray-200 rounded-lg p-4">
+          <flux />
+        </div>
       </div>
+    </div>
+    <div class="relative overflow-auto pb-8 px-8">
       <div class="bg-gray-200 rounded-lg p-4">
-        <flux />
+        <total />
       </div>
     </div>
   </div>
-  <div class="relative overflow-auto pb-8 px-8">
-    <div class="bg-gray-200 rounded-lg p-4">
-      <total />
-    </div>
-  </div>
-</div>
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
   components: {
     Flux,
     Ravencoin,
-    Total
-  }
+    Total,
+  },
 };
 </script>
