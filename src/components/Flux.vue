@@ -5,7 +5,7 @@
     <div>Hashrate: {{ hashRate.toFixed(2) }} Sol/s</div>
     <!-- <div>Parallel Assets: {{ parallelAssets.toFixed(4) }}</div> -->
     <!-- <div>Mined: {{ minedCoins.toFixed(4) }}</div> -->
-    <div>Total Coins: {{ coins.toFixed(4) }}</div>
+    <div>Coins: {{ coins.toFixed(4) }}</div>
     <div>Price: ${{ price.toFixed(2) }}</div>
     <div>
       Ballance: <b>${{ ballance.toFixed(2) }}</b>
